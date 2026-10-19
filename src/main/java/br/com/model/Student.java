@@ -1,8 +1,11 @@
 package br.com.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Student {
-    private final String firstName;
-    private final String lastName;
+    private  String firstName;
+    private String lastName;
     private double[] grade;
 
     public Student(String firstName, String lastName) throws IllegalArgumentException {
@@ -13,6 +16,7 @@ public class Student {
         this.lastName = lastName.strip();
         this.grade = new double[0];
     }
+
 
     private void validateName(String fullName) throws IllegalArgumentException {
         if (fullName == null || fullName.isBlank()) {

@@ -2,46 +2,36 @@ package br.com.model;
 
 import br.com.policy.ApprovalPolicy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SchoolClass {
-    private final Student[] students;
+    private final List<Student> students;
 
-    public SchoolClass(Student[] students) throws IllegalArgumentException {
-        if (students == null) {
-            throw new IllegalArgumentException( "Nenhum aluno cadastrado, por favor verifique.");
-        }
-
-        for (Student student: students) {
-            if (student == null) {
-                throw new IllegalArgumentException(
-                        "A turma não pode conter um aluno nulo."
-                );
-            }
-        }
-
-        this.students = students.clone();
+    public SchoolClass() throws IllegalArgumentException {
+        this.students = new ArrayList<>();
     }
 
-    public int approved(ApprovalPolicy approvalPolicy) {
-        int count = 0;
-
-        for (Student student: students) {
-            if (approvalPolicy.isApproved(student.average())) {
-                count++;
-            }
+    public void addStudent(Student student) {
+        if (student == null) {
+            throw new IllegalArgumentException("O aluno não pode ser nulo.");
         }
 
-        return count;
+        this.students.add(student);
     }
 
-    public int reproved(ApprovalPolicy approvalPolicy) {
-        int count = 0;
+    public List<Student> getStudents() {
+        return List.copyOf(this.students);
+    }
 
-        for (Student student: students) {
-            if (!approvalPolicy.isApproved(student.average())) {
-                count++;
-            }
+    public Student findByStudentFullName(String fullName) {
+        for(Student student: this.students) {
+            System.out.println(student.fullName().equalsIgnoreCase(fullName));
+           if(student.fullName().equalsIgnoreCase(fullName)) {
+               return student;
+           }
         }
 
-        return count;
+        return null;
     }
 }

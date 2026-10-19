@@ -7,33 +7,34 @@ import br.com.policy.SchoolPolicy;
 
 public class Main {
     public static void main(String[] args) throws IllegalArgumentException {
-
         Student allan = new Student("Allan", "Rodrigues");
-        allan.gradeNotes(new double[] {0, 3, 9, 2, 10});
+        allan.gradeNotes(new double[]{10, 5, 10, 10, 9});
 
-        Student ana = new Student("Ana", "Rodrigues");
-        ana.gradeNotes(new double[] {10, 7, 9, 8, 10});
+        Student thaina = new Student("Thaina", "Rodrigues");
+        thaina.gradeNotes(new double[]{10, 10, 10, 10, 10});
 
-        Student thaina = new Student("Thaina", "Fernandes");
-        thaina.gradeNotes(new double[] {10, 10, 9, 8, 10});
+        SchoolClass schoolClass = new SchoolClass();
+        schoolClass.addStudent(allan);
+        schoolClass.addStudent(thaina);
 
-        SchoolClass students = new SchoolClass(
-                new Student[]{allan, ana, thaina}
-        );
-
-        Student[] turmas = {allan, ana, thaina};
+        Student searchStudent = schoolClass.findByStudentFullName("Allan Rodrigues");
         SchoolPolicy schoolPolicy = new SchoolPolicy();
 
-        System.out.println(students.reproved(schoolPolicy));
-
-        for (Student student: turmas) {
-            boolean approved = schoolPolicy.isApproved(student.average());
-
-            if (approved) {
-                System.out.println("Parabéns! " + student.fullName() + " foi aprovado.");
-            } else {
-                System.out.println(student.fullName() + " não foi aprovado.");
-            }
+        if(searchStudent != null) {
+            System.out.println("Aluno: " + searchStudent.fullName());
+            System.out.println("Média: " + searchStudent.average());
+            System.out.println(
+                    "Aprovado: " + schoolPolicy.isApproved(searchStudent.average())
+            );
         }
+
+
+//        for (Student student : schoolClass.getStudents()) {
+//            System.out.println("Aluno: " + student.fullName());
+//            System.out.println("Média: " + student.average());
+//            System.out.println(
+//                    "Aprovado: " + schoolPolicy.isApproved(student.average())
+//            );
+//        }
     }
 }
