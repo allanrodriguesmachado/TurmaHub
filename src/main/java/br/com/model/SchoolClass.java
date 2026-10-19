@@ -26,7 +26,6 @@ public class SchoolClass {
 
     public Student findByStudentFullName(String fullName) {
         for(Student student: this.students) {
-            System.out.println(student.fullName().equalsIgnoreCase(fullName));
            if(student.fullName().equalsIgnoreCase(fullName)) {
                return student;
            }

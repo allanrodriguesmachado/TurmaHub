@@ -8,7 +8,7 @@ import br.com.policy.SchoolPolicy;
 public class Main {
     public static void main(String[] args) throws IllegalArgumentException {
         Student allan = new Student("Allan", "Rodrigues");
-        allan.gradeNotes(new double[]{10, 5, 10, 10, 9});
+        allan.gradeNotes(new double[]{4, 5, 10, 3, 6});
 
         Student thaina = new Student("Thaina", "Rodrigues");
         thaina.gradeNotes(new double[]{10, 10, 10, 10, 10});
@@ -26,6 +26,10 @@ public class Main {
             System.out.println(
                     "Aprovado: " + schoolPolicy.isApproved(searchStudent.average())
             );
+        }
+
+        if (searchStudent == null) {
+            System.out.println("Estudando nao localizado");
         }
 
 
